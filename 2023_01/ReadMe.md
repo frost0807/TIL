@@ -10,6 +10,8 @@
 
 ### [ConcurrentHashMap이란?](#arrow_forward-concurrenthashmap이란)
 
+### [유닛 테스트 메소드 네이밍 규칙](#arrow_forward-유닛-테스트-메소드-네이밍-규칙)
+
 <br>
 
 ---
@@ -225,3 +227,87 @@ HashMap의 경우 resize를 할 때 새로운 배열을 만들어 copy 하는 �
 #### 1.8 버전에서의 변경점
 
 JAVA 1.5버전에 추가된 ConcurrentHashMap은 추가될 당시에는 영역(기본 16개)을 구분하여 영역별로 Lock을 거는 방식이었지만, 1.8버전에서 영역별이 아닌 버킷단위로 Lock을 거는 방식으로 바뀌었다.
+
+<br>
+
+### :arrow_forward: 유닛 테스트 메소드 네이밍 규칙
+
+출처 : https://dzone.com/articles/7-popular-unit-test-naming
+
+#### 1. MethodName_StateUnderTest_ExpectedBehavior
+
+예제:
+
+isAdult_AgeLessThan18_False
+
+withdrawMoney_InvalidAccount_ExceptionThrown
+
+admitStudent_MissingMandatoryFields_FailToAdmit
+
+<br>
+
+#### 2. MethodName_ExpectedBehavior_StateUndertest
+
+예제:
+
+isAdult_False_AgeLessThan18
+
+withdrawMoney_ExceptionThrown_InvalidAccount
+
+admitStudent_FailToAdmit_MissingMandatoryFields
+
+<br>
+
+#### 3. test[Feature being tested]
+
+예제:
+
+testIsNotAnAdultIfAgeLessThan18
+
+testFailToWithdrawMoneyIfAccountIsInvalid
+
+testStudentIsNotAdmittedIfMandatoryFieldAreMissing
+
+<br>
+
+#### 4. Feature to be tested
+
+예제:
+
+IsNotAnAdultIfAgeLessThan18
+
+FailToWithdrawMoneyIfAccountIsInvalid
+
+StudentIsNotAdmittedIfMandatoryFieldsAreMissing
+
+<br>
+
+#### 5. Should_ExpectedBehavior_When_StateUnderTest
+
+예제:
+
+Should_ThrowException_When_AgeLessThan18
+
+Should_FailToWithdrawMoney_ForInvalidAccount
+
+Should_FailToAdmit_IfMandatoryFieldsAreMissing
+
+<br>
+
+#### 6. When_StateUnderTest_Expect_ExpectedBehavior
+
+예제:
+
+When_AgeLessThan18_Expect_isAdultAsFalse
+
+When_InvalidAccount_Expect_WithdrawMoneyToFail
+
+When_MandatoryFieldsAreMissing_Expect_StudentAdmissionToFail
+
+<br>
+
+#### 7. Given_Preconditions_When_SateUnderTest_Then_ExpectedBehavior
+
+예제:
+
+Given_UserIsAuthenticated_When_InvalidAccountNumberIsUsedToWithdrawMoney_Then_TransactionsWillFail
