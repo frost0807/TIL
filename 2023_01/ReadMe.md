@@ -12,6 +12,10 @@
 
 ### [유닛 테스트 메소드 네이밍 규칙](#arrow_forward-유닛-테스트-메소드-네이밍-규칙)
 
+### [Transaction의 ACID 4가지 성질](#arrow_forward-transaction의-acid-4가지-성질)
+
+### [@Transaction(readonly = true)를 사용하는 이유](#arrow_forward-transactionalreadonly--true를-사용하는-이유)
+
 <br>
 
 ---
@@ -311,3 +315,20 @@ When_MandatoryFieldsAreMissing_Expect_StudentAdmissionToFail
 예제:
 
 Given_UserIsAuthenticated_When_InvalidAccountNumberIsUsedToWithdrawMoney_Then_TransactionsWillFail
+
+### :arrow_forward: Transaction의 ACID 4가지 성질
+
+출처 : https://resilient-923.tistory.com/391
+
+- Atomic(원자성) : 한 Transaction 내에서 처리되는 작업들은 한꺼번에 이루어져야 한다.
+- Consistency(일관성) : Transaction은 일관된 DB상태를 유지해야 한다.
+- Isolation(격리성) : 동시에 실행되는 Transaction들이 서로 영향을 주지 않도록 해야한다.
+- Durabolity(영속성) : commit된 Transation의 데이터는 DB에 영구적으로 저장되어야 한다.
+
+### :arrow_forward: @Transactional(readonly = true)를 사용하는 이유
+
+출처 : https://resilient-923.tistory.com/391, https://cupeanimus.tistory.com/90
+
+1. 강제로 flush를 하지 않는한 flush가 일어나지 않고, EntityManager가 SnapShot을 유지하지 않아서 사소하지만 성능 향상이 있다.
+2. DB가 Master와 Slave로 나누어져 있는 경우, 읽기전용인 slave를 호출하게 되어 DB 부담이 적어진다.
+3. 명시적으로 읽기 작업만 한다는걸 나타내줌으로써 의도를 전달할 수 있다.
